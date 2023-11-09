@@ -1,3 +1,4 @@
+
 from app import db
 from sqlalchemy import ForeignKey
 
@@ -36,3 +37,4 @@ class Empleado(db.Model):
 
     def __str__(self):
         return f"{self.nombre} {self.apellido}"
+
