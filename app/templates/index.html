@@ -1,0 +1,79 @@
+{% extends 'layout.html'%}
+{% block title %}
+    Inicio
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-6">
+            <h3>Ingrese un nuevo empleado:</h3>
+            <form action="/agregar_empleado" method="post">
+                <label for="nombre">
+                    Nombre:
+                </label>
+                <input type="text" name="nombre" class="form-control w-25" required>
+                
+                <label for="apellido">
+                    Apellido:
+                </label>
+                <input type="text" name="apellido" class="form-control w-25" required>
+                
+                <label for="email">
+                    Email:
+                </label>
+                <input type="email" name="email" class="form-control w-25" required>
+                
+                <label for="telefono">
+                    Teléfono:
+                </label>
+                <input type="tel" name="telefono" class="form-control w-25">
+                
+                <label for="fecha_contratacion">
+                    Fecha de Contratación:
+                </label>
+                <input type="date" name="fecha_contratacion" class="form-control w-25" required>
+                
+                <label for="departamento">
+                    Departamento:
+                </label>
+                <select name="departamento" class="form-control w-25" required>
+                    {% for departamento in departamentos %}
+                        <option value="{{ departamento.id }}">{{ departamento.nombre }}</option>
+                    {% endfor %}
+                </select>
+                
+                <label for="puesto">
+                    Puesto:
+                </label>
+                <select name="puesto" class="form-control w-25" required>
+                    {% for puesto in puestos %}
+                        <option value="{{ puesto.id }}">{{ puesto.nombre }}</option>
+                    {% endfor %}
+                </select>
+                
+                <button type="submit" class="btn btn-submit btn-success my-3">
+                    Agregar
+                </button>
+            </form>
+        </div>
+        <div class="col-4">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Empleado</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for empleado in empleados %}
+                        <tr>
+                            <td>{{ empleado.nombre }} {{ empleado.apellido }}</td>
+                            <td><a href="/borrar_empleado/{{ empleado.id }}" class="btn btn-danger">Borrar</a></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
